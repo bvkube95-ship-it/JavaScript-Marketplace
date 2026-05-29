@@ -44,7 +44,7 @@ products.forEach((product) => {
 
             <div class="product-spacer"></div>
 
-            <div class="added-to-cart js-added-to-cart-${product.id}">
+            <div class="added-to-cart" data-product-id="${product.id}">
               <img src="images/icons/checkmark.png">
               Added
             </div>
@@ -60,7 +60,7 @@ products.forEach((product) => {
 document.querySelector('.js-products-grid')
   .innerHTML = productsHTML;
 
-let timeoutMessage = [];
+let timeoutMessage = {};
 
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
@@ -73,7 +73,7 @@ document.querySelectorAll('.js-add-to-cart')
       addToCart(productId, selectedValue);
       updateQuantity();
 
-      const addedToCart = document.querySelector(`.js-added-to-cart-${productId}`);
+      const addedToCart = document.querySelector(`.added-to-cart[data-product-id="${productId}"]`);
       addedToCart.classList.add('show');
 
       clearTimeout(timeoutMessage[productId]);
