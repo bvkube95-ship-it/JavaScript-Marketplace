@@ -1,0 +1,7 @@
+let buttonTimer;
+
+	clearTimeout(buttonTimer);
+	
+	buttonTimer = setTimeout(() => {
+        addedToCart.classList.remove('show');
+      	}, 1500);
