@@ -95,3 +95,4 @@ function updateQuantity() {
       document.querySelector('.js-cart-quantity')
         .innerHTML = cartQuantity;
 }
+updateQuantity();

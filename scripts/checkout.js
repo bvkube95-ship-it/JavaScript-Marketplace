@@ -1,14 +1,18 @@
 import { cart } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
+import { calculateOrder, renderPaymentSummary, updateQuantity } from "./checkout/paymentSummary.js";
 
 let cartSummaryHTML = '';
 
-cart.forEach((cartItem) => {
-  const productId = cartItem.productId;
+export const productsMap = {};
 
-  const matchingItem = products.find(product => 
-    product.id === productId);
+products.forEach((product) => {
+  productsMap[product.id] = product;
+});
+
+cart.forEach((cartItem) => {
+  const matchingItem = productsMap[cartItem.productId];
 
   cartSummaryHTML += `
       <div class="cart-item-container">
@@ -91,3 +95,7 @@ cart.forEach((cartItem) => {
 
 document.querySelector('.js-order-summary')
   .innerHTML = cartSummaryHTML;
+
+updateQuantity();
+calculateOrder();
+renderPaymentSummary();
