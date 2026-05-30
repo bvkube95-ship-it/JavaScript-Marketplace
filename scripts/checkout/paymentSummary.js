@@ -52,7 +52,7 @@ export function renderPaymentSummary() {
       .innerHTML = `$${formatCurrency(totals.totalWithTaxCents)}`;
 }
 
-export function updateQuantity() {
+export function updateSummaryQuantity() {
   let summaryQuantity = 0;
 
   cart.forEach((cartItem) => {
