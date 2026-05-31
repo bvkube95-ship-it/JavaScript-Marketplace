@@ -1,11 +1,10 @@
 import { cart, removeFromCart, saveToStorage } from "../data/cart.js";
-import { products } from "../data/products.js";
+import { products, productsMap } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
-import { calculateOrder, renderPaymentSummary, updateSummaryQuantity } from "./checkout/paymentSummary.js";
+import { calculateOrder, renderPaymentSummary, updateQuantity } from "./checkout/paymentSummary.js";
 
 let cartSummaryHTML = '';
 
-export const productsMap = {};
 
 products.forEach((product) => {
   productsMap[product.id] = product;
@@ -110,11 +109,11 @@ document.querySelectorAll('.js-delete-button')
 
       container.remove();
 
-      updateSummaryQuantity();
+      updateQuantity();
       renderPaymentSummary();
     });
   });
 
-updateSummaryQuantity();
+updateQuantity();
 calculateOrder();
 renderPaymentSummary();

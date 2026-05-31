@@ -1,5 +1,5 @@
 import { cart } from "../../data/cart.js";
-import { productsMap } from "../checkout.js";
+import { productsMap } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 
 export function calculateOrder() {
@@ -52,13 +52,28 @@ export function renderPaymentSummary() {
       .innerHTML = `$${formatCurrency(totals.totalWithTaxCents)}`;
 }
 
-export function updateSummaryQuantity() {
-  let summaryQuantity = 0;
+export function updateQuantity() {
+  let itemsQuantity = 0;
 
   cart.forEach((cartItem) => {
-    summaryQuantity += cartItem.quantity;
+    itemsQuantity += cartItem.quantity;
   });
 
-  document.querySelector('.js-summary-quantity')
-    .innerHTML = `Items (${summaryQuantity})`;
+  const cartQuantity = document.querySelector('.js-cart-quantity');
+
+  if (cartQuantity && itemsQuantity > 0) {
+    cartQuantity.innerHTML = itemsQuantity;
+  }
+
+  const orderQuantity = document.querySelector('.js-order-quantity');
+
+  if (orderQuantity) {
+    orderQuantity.innerHTML = `Items (${itemsQuantity})`;
+  }
+
+  const checkoutQuantity = document.querySelector('.js-checkout-quantity');
+
+  if (checkoutQuantity) {
+    checkoutQuantity.innerHTML = `${itemsQuantity} Items`;
+  }
 }
