@@ -37,6 +37,10 @@ cart.forEach((cartItem) => {
               <span class="update-quantity-link link-primary">
                 Update
               </span>
+              <input class="quantity-input">
+              <span class="link-primary js-save-button">
+                Save
+              </span>
               <span class="delete-quantity-link link-primary js-delete-button"
               data-product-id="${matchingItem.id}">
                 Delete
