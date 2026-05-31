@@ -100,12 +100,22 @@
   margin-left: 3px;
 }
 
-.quantity-input {
+.js-quantity-input {
   width: 30px;
+}
+
+.js-quantity-input,
+.js-save-button {
   display: none;
 }
 
-.js-save-button {
+.editing-container .js-quantity-input,
+.editing-container .js-save-button {
+  display: inline;
+}
+
+.editing-container .quantity-label,
+.editing-container .js-update-button {
   display: none;
 }
 
