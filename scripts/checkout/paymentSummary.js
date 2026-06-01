@@ -3,7 +3,17 @@ import { productsMap } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 
 export function calculateOrder() {
-  const shippingPriceCents = 499;
+  let shippingPriceCents = 0;
+
+  cart.forEach((cartItem) => {
+    const selectedOption = document.querySelector(
+      `input[name="delivery-option-${cartItem.productId}"]:checked`
+    );
+    if (selectedOption) {
+      shippingPriceCents += Number(selectedOption.value);
+    }
+  });
+
 
   let productsPriceCents = 0;
 
@@ -30,6 +40,7 @@ export function calculateOrder() {
 
   return {
     productsPriceCents,
+    shippingPriceCents,
     totalBeforeTaxCents,
     estimatedTaxCents,
     totalWithTaxCents
@@ -41,6 +52,9 @@ export function renderPaymentSummary() {
 
     document.querySelector('.js-total')
       .innerHTML = `$${formatCurrency(totals.productsPriceCents)}`;
+
+    document.querySelector('.js-shipping')
+      .innerHTML = `$${formatCurrency(totals.shippingPriceCents)}`
 
     document.querySelector('.js-total-before-tax')
       .innerHTML = `$${formatCurrency(totals.totalBeforeTaxCents)}`;
