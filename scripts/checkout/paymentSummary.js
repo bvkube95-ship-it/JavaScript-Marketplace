@@ -1,16 +1,18 @@
 import { cart } from "../../data/cart.js";
 import { productsMap } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
+import { deliveryOptions } from "../../data/deliveryOptions.js";
 
 export function calculateOrder() {
   let shippingPriceCents = 0;
 
   cart.forEach((cartItem) => {
-    const selectedOption = document.querySelector(
-      `input[name="delivery-option-${cartItem.productId}"]:checked`
+    const option = deliveryOptions.find(
+      o => o.id === cartItem.deliveryOptionId
     );
-    if (selectedOption) {
-      shippingPriceCents += Number(selectedOption.value);
+
+    if (option) {
+      shippingPriceCents += option.priceCents;
     }
   });
 
