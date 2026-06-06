@@ -50,3 +50,13 @@ export function updateProductQuantity(productId, newQuantity) {
 export function saveToStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
+
+export function updateDeliveryOption(productId, deliveryOptionId) {
+
+  const matchingItem = cart.find((cartItem) => productId === cartItem.productId);
+
+  if (!matchingItem) return; // защита от краша
+
+  matchingItem.deliveryOptionId = deliveryOptionId;
+  saveToStorage();
+}

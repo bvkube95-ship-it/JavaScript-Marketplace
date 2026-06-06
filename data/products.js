@@ -660,3 +660,7 @@ export const products = [
     ]
   }
 ];
+
+products.forEach((product) => {
+  productsMap[product.id] = product;
+});
