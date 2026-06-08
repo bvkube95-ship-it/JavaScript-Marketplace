@@ -46,11 +46,7 @@ function deliveryOptionsHTML(matchingItem, cartItem) {
 function handleDeleteClick(productId) {
   removeFromCart(productId);
 
-  const container = document.querySelector(`.js-item-container-${productId}`);
-  if (container) {
-    container.remove();
-  }
-
+  renderOrderSummary();
   updateQuantity();
   renderPaymentSummary();
 }
