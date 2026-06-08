@@ -113,10 +113,4 @@ export function updateQuantity() {
   if (orderQuantity) {
     orderQuantity.innerHTML = `Items (${itemsQuantity})`;
   }
-
-  const checkoutQuantity = document.querySelector('.js-checkout-quantity');
-
-  if (checkoutQuantity) {
-    checkoutQuantity.innerHTML = `${itemsQuantity} Items`;
-  }
 }

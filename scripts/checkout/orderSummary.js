@@ -3,6 +3,7 @@ import { productsMap } from "../../data/products.js";
 import formatCurrency from "../utils/money.js";
 import { renderPaymentSummary, updateQuantity } from "./paymentSummary.js";
 import { deliveryOptions } from "../../data/deliveryOptions.js";
+import { renderHeader } from "./checkoutHeader.js";
 
 function deliveryOptionsHTML(matchingItem, cartItem) {
   let html = '';
@@ -49,6 +50,7 @@ function handleDeleteClick(productId) {
   renderOrderSummary();
   updateQuantity();
   renderPaymentSummary();
+  renderHeader();
 }
 
 export function renderOrderSummary() {
@@ -165,6 +167,7 @@ export function renderOrderSummary() {
 
       updateQuantity();
       renderPaymentSummary();
+      renderHeader();
     });
   });
 
