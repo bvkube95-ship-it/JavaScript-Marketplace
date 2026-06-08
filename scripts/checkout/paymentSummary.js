@@ -52,20 +52,47 @@ export function calculateOrder() {
 export function renderPaymentSummary() {
     const totals = calculateOrder();
 
-    document.querySelector('.js-total')
-      .innerHTML = `$${formatCurrency(totals.productsPriceCents)}`;
+    let itemsQuantity = 0;
+    cart.forEach((cartItem) => {
+      itemsQuantity += cartItem.quantity;
+    });
 
-    document.querySelector('.js-shipping')
-      .innerHTML = `$${formatCurrency(totals.shippingPriceCents)}`
+    const html = `
+        <div class="payment-summary-title">
+          Order Summary
+        </div>
 
-    document.querySelector('.js-total-before-tax')
-      .innerHTML = `$${formatCurrency(totals.totalBeforeTaxCents)}`;
+        <div class="payment-summary-row">
+          <div class="js-order-quantity">Items (${itemsQuantity}):</div>
+          <div class="payment-summary-money js-total">$${formatCurrency(totals.productsPriceCents)}</div>
+        </div>
 
-    document.querySelector('.js-estimated-tax')
-      .innerHTML = `$${formatCurrency(totals.estimatedTaxCents)}`;
+        <div class="payment-summary-row">
+          <div>Shipping &amp; handling:</div>
+          <div class="payment-summary-money js-shipping">$${formatCurrency(totals.shippingPriceCents)}</div>
+        </div>
 
-    document.querySelector('.js-total-with-tax')
-      .innerHTML = `$${formatCurrency(totals.totalWithTaxCents)}`;
+        <div class="payment-summary-row subtotal-row">
+          <div>Total before tax:</div>
+          <div class="payment-summary-money js-total-before-tax">$${formatCurrency(totals.totalBeforeTaxCents)}</div>
+        </div>
+
+        <div class="payment-summary-row">
+          <div>Estimated tax (10%):</div>
+          <div class="payment-summary-money js-estimated-tax">$${formatCurrency(totals.estimatedTaxCents)}</div>
+        </div>
+
+        <div class="payment-summary-row total-row">
+          <div>Order total:</div>
+          <div class="payment-summary-money js-total-with-tax">$${formatCurrency(totals.totalWithTaxCents)}</div>
+        </div>
+
+        <button class="place-order-button button-primary">
+          Place your order
+        </button>
+    `;
+
+    document.querySelector('.js-payment-summary').innerHTML = html;
 }
 
 export function updateQuantity() {
