@@ -1,4 +1,4 @@
-import formatCurrency from '../scripts/utils/money.js';
+import formatCurrency from '../../scripts/utils/money.js';
 
 describe("A suite is just a function", () => {
   it('converts cents', () => {
