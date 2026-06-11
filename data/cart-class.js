@@ -24,9 +24,9 @@ class Cart {
     }
 
     addToCart(productId, selectedValue, deliveryOptionId) {
-    let matchingItem;
-
-        this.cartItems.find((cartItem) => cartItem.productId === productId);
+      
+      let matchingItem = this.cartItems
+        .find((cartItem) => cartItem.productId === productId);
 
         if (matchingItem) {
           matchingItem.quantity += Number(selectedValue);
@@ -79,8 +79,5 @@ class Cart {
     }
   }
 
-const cart = new Cart('cart-oop');
-const businessCart = new Cart('cart-business');
-
-console.log(cart);
-console.log(businessCart);
+export const cart = new Cart('cart-oop');
+export const businessCart = new Cart('cart-business');

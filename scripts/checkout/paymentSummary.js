@@ -1,4 +1,4 @@
-import { cart } from "../../data/cart.js";
+import { cart } from "../../data/cart-class.js";
 import { productsMap } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import { deliveryOptions } from "../../data/deliveryOptions.js";
@@ -6,7 +6,7 @@ import { deliveryOptions } from "../../data/deliveryOptions.js";
 export function calculateOrder() {
   let shippingPriceCents = 0;
 
-  cart.forEach((cartItem) => {
+  cart.cartItems.forEach((cartItem) => {
     const option = deliveryOptions.find(
       o => o.id === cartItem.deliveryOptionId
     );
@@ -19,7 +19,7 @@ export function calculateOrder() {
 
   let productsPriceCents = 0;
 
-  cart.forEach((cartItem) => {
+  cart.cartItems.forEach((cartItem) => {
     const matchingItem = productsMap[cartItem.productId];
 
     productsPriceCents +=
@@ -53,7 +53,7 @@ export function renderPaymentSummary() {
     const totals = calculateOrder();
 
     let itemsQuantity = 0;
-    cart.forEach((cartItem) => {
+    cart.cartItems.forEach((cartItem) => {
       itemsQuantity += cartItem.quantity;
     });
 
@@ -98,7 +98,7 @@ export function renderPaymentSummary() {
 export function updateQuantity() {
   let itemsQuantity = 0;
 
-  cart.forEach((cartItem) => {
+  cart.cartItems.forEach((cartItem) => {
     itemsQuantity += cartItem.quantity;
   });
 

@@ -1,4 +1,4 @@
-import { cart, removeFromCart, updateProductQuantity, updateDeliveryOption } from "../../data/cart.js";
+import { cart } from "../../data/cart-class.js";
 import { productsMap } from "../../data/products.js";
 import formatCurrency from "../utils/money.js";
 import { renderPaymentSummary, updateQuantity } from "./paymentSummary.js";
@@ -45,7 +45,7 @@ function deliveryOptionsHTML(matchingItem, cartItem, today) {
 }
 
 function handleDeleteClick(productId) {
-  removeFromCart(productId);
+  cart.removeFromCart(productId);
 
   renderOrderSummary();
   updateQuantity();
@@ -57,7 +57,7 @@ export function renderOrderSummary() {
   const today = dayjs();
   let cartSummaryHTML = '';
 
-  cart.forEach((cartItem) => {
+  cart.cartItems.forEach((cartItem) => {
     const matchingItem = productsMap[cartItem.productId];
 
     const deliveryOptionId = cartItem.deliveryOptionId;
@@ -161,7 +161,7 @@ export function renderOrderSummary() {
 
       document.querySelector(`.js-item-container-${productId}`).classList.remove('editing-container');
 
-      updateProductQuantity(productId, newQuantity);
+      cart.updateProductQuantity(productId, newQuantity);
 
       document.querySelector(`.js-quantity-label-${productId}`).innerHTML = newQuantity;
 
@@ -182,7 +182,7 @@ export function renderOrderSummary() {
   document.querySelectorAll('.js-delivery-option').forEach((element) => {
     element.addEventListener('click', () => {
       const { productId, deliveryOptionId } = element.dataset;
-      updateDeliveryOption(productId, deliveryOptionId);
+      cart.updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
       renderPaymentSummary();
     });

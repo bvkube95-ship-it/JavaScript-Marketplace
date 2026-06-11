@@ -1,6 +1,6 @@
 import { products } from "../data/products.js";
-import { cart, addToCart } from "../data/cart.js"
-import { formatCurrency } from "./utils/money.js";
+import { cart } from "../data/cart-class.js";
+import formatCurrency from "./utils/money.js";
 import { updateQuantity } from "./checkout/paymentSummary.js";
 
 let productsHTML = '';
@@ -72,7 +72,7 @@ document.querySelectorAll('.js-add-to-cart')
       const selectElement = document.querySelector(`.js-quantity-selector-${productId}`);
       const selectedValue = Number(selectElement.value);
 
-      addToCart(productId, selectedValue);
+      cart.addToCart(productId, selectedValue);
       updateQuantity();
 
       const addedToCart = document.querySelector(`.added-to-cart[data-product-id="${productId}"]`);
