@@ -1,15 +1,15 @@
-import formatCurrency from '../../scripts/utils/money.js';
+import formatCurrency from "../../scripts/utils/money.js";
 
-describe("A suite is just a function", () => {
+describe("A suite for functions", () => {
   it('converts cents', () => {
     expect(formatCurrency(2095)).toEqual('20.95');
   });
 
-  it('work woth zero', () => {
+  it('work with zero', () => {
     expect(formatCurrency(0)).toEqual('0.00');
   });
 
-  it('rounds to cent', () => {
+  it('rounds to cents', () => {
     expect(formatCurrency(2005.5)).toEqual('20.06');
   });
 });
