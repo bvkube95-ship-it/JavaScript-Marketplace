@@ -4,13 +4,13 @@ import formatCurrency from "../utils/money.js";
 import { renderPaymentSummary, updateQuantity } from "./paymentSummary.js";
 import { deliveryOptions } from "../../data/deliveryOptions.js";
 import { renderHeader } from "./checkoutHeader.js";
+import addBusinessDays from "../utils/date.js";
 
-function deliveryOptionsHTML(matchingItem, cartItem) {
+function deliveryOptionsHTML(matchingItem, cartItem, today) {
   let html = '';
 
   deliveryOptions.forEach((deliveryOption) => {
-    const today = dayjs();
-    const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
+    const deliveryDate = addBusinessDays(today, deliveryOption.deliveryDays);
     const dateString = deliveryDate.format('dddd, MMMM D');
 
     const priceString = deliveryOption.priceCents === 0
@@ -54,6 +54,7 @@ function handleDeleteClick(productId) {
 }
 
 export function renderOrderSummary() {
+  const today = dayjs();
   let cartSummaryHTML = '';
 
   cart.forEach((cartItem) => {
@@ -65,8 +66,7 @@ export function renderOrderSummary() {
       deliveryOptions.find((option) => option.id === deliveryOptionId)
       ?? deliveryOptions[0];
 
-    const today = dayjs();
-    const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
+    const deliveryDate = addBusinessDays(today, deliveryOption.deliveryDays);
     const dateString = deliveryDate.format('dddd, MMMM D');
 
     cartSummaryHTML += `
@@ -121,7 +121,7 @@ export function renderOrderSummary() {
             <div class="delivery-options-title">
               Choose a delivery option:
             </div>
-            ${deliveryOptionsHTML(matchingItem, cartItem)}
+            ${deliveryOptionsHTML(matchingItem, cartItem, today)}
           </div>
         </div>
       </div>

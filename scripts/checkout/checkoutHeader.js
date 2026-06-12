@@ -18,4 +18,4 @@ export function renderHeader() {
   document.querySelector('.js-checkout-header-quantity').innerHTML = html;
 }
 
-export default renderHeader();
+export default renderHeader;

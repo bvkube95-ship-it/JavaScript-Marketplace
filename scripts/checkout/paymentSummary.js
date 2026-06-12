@@ -107,10 +107,4 @@ export function updateQuantity() {
   if (cartQuantity && itemsQuantity > 0) {
     cartQuantity.innerHTML = itemsQuantity;
   }
-
-  const orderQuantity = document.querySelector('.js-order-quantity');
-
-  if (orderQuantity) {
-    orderQuantity.innerHTML = `Items (${itemsQuantity})`;
-  }
 }
