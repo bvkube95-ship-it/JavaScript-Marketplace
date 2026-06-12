@@ -1,9 +1,10 @@
-import { products, loadProducts } from "../data/products.js";
+import { products, loadProductsFetch } from "../data/products.js";
 import { cart } from "../data/cart-class.js";
 import formatCurrency from "./utils/money.js";
 import { updateQuantity } from "./checkout/paymentSummary.js";
 
-loadProducts(renderProductsGrid);
+await loadProductsFetch();
+renderProductsGrid();
 
 function renderProductsGrid() {
   let productsHTML = '';
@@ -90,6 +91,4 @@ document.querySelectorAll('.js-add-to-cart')
       }, 1500);
     });
   });
-
-updateQuantity();
 }

@@ -3,11 +3,14 @@ import { calculateOrder, renderPaymentSummary, updateQuantity } from "./checkout
 import renderHeader from "./checkout/checkoutHeader.js";
 import formatCurrency from "./utils/money.js";
 import { cart } from "../data/cart-class.js";
-import { loadProducts } from "../data/products.js";
+import { loadProductsFetch } from "../data/products.js";
 
-// import '../data/backend-practice.js';
-
-loadProducts(() => {
+Promise.all([
+  loadProductsFetch(),
+  new Promise((resolve) => {
+    resolve();
+  })
+]).then(() => {
   renderOrderSummary();
   updateQuantity();
   calculateOrder();
