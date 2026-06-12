@@ -1,9 +1,12 @@
-import { products } from "../data/products.js";
+import { products, loadProducts } from "../data/products.js";
 import { cart } from "../data/cart-class.js";
 import formatCurrency from "./utils/money.js";
 import { updateQuantity } from "./checkout/paymentSummary.js";
 
-let productsHTML = '';
+loadProducts(renderProductsGrid);
+
+function renderProductsGrid() {
+  let productsHTML = '';
 
 products.forEach((product) => {
   productsHTML += `
@@ -89,3 +92,4 @@ document.querySelectorAll('.js-add-to-cart')
   });
 
 updateQuantity();
+}

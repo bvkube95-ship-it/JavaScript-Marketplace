@@ -3,11 +3,14 @@ import { calculateOrder, renderPaymentSummary, updateQuantity } from "./checkout
 import renderHeader from "./checkout/checkoutHeader.js";
 import formatCurrency from "./utils/money.js";
 import { cart } from "../data/cart-class.js";
+import { loadProducts } from "../data/products.js";
 
-import '../data/backend-practice.js';
+// import '../data/backend-practice.js';
 
-renderOrderSummary();
-updateQuantity();
-calculateOrder();
-renderPaymentSummary();
-renderHeader();
+loadProducts(() => {
+  renderOrderSummary();
+  updateQuantity();
+  calculateOrder();
+  renderPaymentSummary();
+  renderHeader();
+});
