@@ -1,11 +1,13 @@
 import { orders } from "../../data/orders.js";
 import { productsMap } from "../../data/products.js";
 import formatCurrency from "../utils/money.js";
+import addBusinessDays from "../utils/date.js";
 
 export function renderOrders() {
   let ordersHTML = '';
 
   orders.forEach((order) => {
+    if (!order.products) return;
     const orderDate = dayjs(order.orderTime).format('MMMM D');
 
     let productsHTML = '';
@@ -14,7 +16,9 @@ export function renderOrders() {
       const product = productsMap[orderProduct.productId];
       if (!product) return;
 
-      const deliveryDate = dayjs(orderProduct.estimatedDeliveryTime).format('MMMM D');
+      const deliveryDate = addBusinessDays(
+        dayjs(orderProduct.estimatedDeliveryTime), 0
+      ).format('MMMM D');
 
       productsHTML += `
         <div class="product-image-container">

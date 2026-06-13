@@ -97,6 +97,10 @@ export function renderPaymentSummary() {
 
     document.querySelector('.js-place-order')
       .addEventListener('click', async () => {
+        if (cart.cartItems.length === 0) {
+          alert('Your cart is empty!');
+          return;
+        }
         try {
           const response = await fetch('https://supersimplebackend.dev/orders', {
             method: 'POST',
@@ -104,17 +108,20 @@ export function renderPaymentSummary() {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              cart: cart
+              cart: cart.cartItems
             })
           });
 
           const order = await response.json();
           addOrder(order);
-        } catch (error) {
-          console.log('Unexpected error. Please try again later')
-        }
 
-        window.location.href = 'orders.html'
+          cart.cartItems = [];
+          cart.saveToStorage();
+
+          window.location.href = 'orders.html'
+        } catch (error) {
+          console.log(error)
+        }
       });
 }
 

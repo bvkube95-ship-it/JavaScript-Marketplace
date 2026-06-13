@@ -4,7 +4,8 @@ import formatCurrency from "./utils/money.js";
 import { updateQuantity } from "./checkout/paymentSummary.js";
 
 await loadProductsFetch();
-renderProductsGrid();
+  renderProductsGrid();
+  updateQuantity();
 
 function renderProductsGrid() {
   let productsHTML = '';
