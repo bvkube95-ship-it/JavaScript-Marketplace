@@ -5,6 +5,18 @@ import formatCurrency from "./utils/money.js";
 import { cart } from "../data/cart-class.js";
 import { loadProductsFetch } from "../data/products.js";
 
+async function loadPage() {
+  await loadProductsFetch();
+
+  renderOrderSummary();
+  updateQuantity();
+  calculateOrder();
+  renderPaymentSummary();
+  renderHeader();
+}
+loadPage();
+
+/*
 Promise.all([
   loadProductsFetch(),
   new Promise((resolve) => {
@@ -17,3 +29,4 @@ Promise.all([
   renderPaymentSummary();
   renderHeader();
 });
+*/
