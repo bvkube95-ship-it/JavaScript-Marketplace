@@ -2,6 +2,8 @@ import { orders } from "../../data/orders.js";
 import { productsMap } from "../../data/products.js";
 import formatCurrency from "../utils/money.js";
 import addBusinessDays from "../utils/date.js";
+import { deliveryOptions } from "../../data/deliveryOptions.js";
+import { updateQuantity } from "../checkout/paymentSummary.js";
 
 export function renderOrders() {
   let ordersHTML = '';
@@ -13,11 +15,16 @@ export function renderOrders() {
     let productsHTML = '';
 
     order.products.forEach((orderProduct) => {
-      const product = productsMap[orderProduct.productId];
+      const product = productsMap[orderProduct.productId]; // ← добавь эту строку
       if (!product) return;
 
+      const deliveryOption = deliveryOptions.find(
+        (option) => option.id === orderProduct.deliveryOptionId
+      ) ?? deliveryOptions[0];
+
       const deliveryDate = addBusinessDays(
-        dayjs(orderProduct.estimatedDeliveryTime), 0
+        dayjs(order.orderTime),
+        deliveryOption.deliveryDays
       ).format('MMMM D');
 
       productsHTML += `
