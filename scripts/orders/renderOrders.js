@@ -15,7 +15,7 @@ export function renderOrders() {
     let productsHTML = '';
 
     order.products.forEach((orderProduct) => {
-      const product = productsMap[orderProduct.productId]; // ← добавь эту строку
+      const product = productsMap[orderProduct.productId];
       if (!product) return;
 
       const deliveryOption = deliveryOptions.find(
