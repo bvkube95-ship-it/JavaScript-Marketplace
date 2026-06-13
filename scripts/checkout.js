@@ -6,7 +6,11 @@ import { cart } from "../data/cart-class.js";
 import { loadProductsFetch } from "../data/products.js";
 
 async function loadPage() {
-  await loadProductsFetch();
+  try {
+    await loadProductsFetch();
+  } catch (error) {
+    console.log('Unexpected error. Please try again later');
+  }
 
   renderOrderSummary();
   updateQuantity();
@@ -15,18 +19,3 @@ async function loadPage() {
   renderHeader();
 }
 loadPage();
-
-/*
-Promise.all([
-  loadProductsFetch(),
-  new Promise((resolve) => {
-    resolve();
-  })
-]).then(() => {
-  renderOrderSummary();
-  updateQuantity();
-  calculateOrder();
-  renderPaymentSummary();
-  renderHeader();
-});
-*/

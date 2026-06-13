@@ -36,12 +36,10 @@ class Clothing extends Product {
   }
 }
 
-export function loadProductsFetch() {
-  const promise = fetch(
-    'https://supersimplebackend.dev/products'
-  ).then((response) => {
-    return response.json();
-  }).then((productsData) => {
+export async function loadProductsFetch() {
+  const response = await fetch('https://supersimplebackend.dev/products');
+  const productsData = await response.json();
+
       products = productsData.map((productDetails) => {
         if (productDetails.type === 'clothing') {
           return new Clothing(productDetails);
@@ -52,6 +50,4 @@ export function loadProductsFetch() {
       products.forEach((product) => {
         productsMap[product.id] = product;
       });
-  });
-  return promise;
-}
+  }
