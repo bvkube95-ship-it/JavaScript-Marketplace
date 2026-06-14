@@ -118,12 +118,14 @@
   align-items: center;
   margin-bottom: 8px;
   opacity: 1;
+  cursor: pointer;
 }
 
 .added-to-cart {
   opacity: 0;
   display: flex;
   margin-bottom: 8px;
+  cursor: default;
 }
 
 .added-to-cart img {
