@@ -113,13 +113,21 @@ export function renderPaymentSummary() {
           });
 
           const order = await response.json();
-          addOrder(order);
 
-          cart.cartItems = [];
-          cart.saveToStorage();
+            order.products = order.products?.map((product) => ({
+              ...product,
+              deliveryOptionId: cart.cartItems.find(
+                (item) => item.productId === product.productId
+              )?.deliveryOptionId
+            }));
 
-          window.location.href = 'orders.html'
-        } catch (error) {
+            addOrder(order);
+
+            cart.cartItems = [];
+            cart.saveToStorage();
+            window.location.href = 'orders.html';
+            
+        }  catch (error) {
           console.log(error)
         }
       });

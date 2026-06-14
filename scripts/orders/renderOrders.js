@@ -24,7 +24,7 @@ export function renderOrders() {
       ) ?? deliveryOptions[0];
 
       const deliveryDate = addBusinessDays(
-        dayjs(order.orderTime),
+        dayjs(order.orderTime).startOf('day'),
         deliveryOption.deliveryDays
       ).format('MMMM D');
 
@@ -88,7 +88,7 @@ export function renderOrders() {
       button.addEventListener('click', () => {
         const productId = button.dataset.productId;
         cart.addToCart(productId, 1);
-        window.location.href = 'checkout.html'
+        window.location.href = 'checkout.html';
       });
     });
 }

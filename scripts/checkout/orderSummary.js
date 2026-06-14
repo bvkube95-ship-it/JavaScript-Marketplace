@@ -180,11 +180,13 @@ export function renderOrderSummary() {
   });
 
   document.querySelectorAll('.js-delivery-option').forEach((element) => {
-    element.addEventListener('click', () => {
-      const { productId, deliveryOptionId } = element.dataset;
-      cart.updateDeliveryOption(productId, deliveryOptionId);
-      renderOrderSummary();
-      renderPaymentSummary();
-    });
+  element.addEventListener('click', () => {
+    const { productId, deliveryOptionId } = element.dataset;
+
+    cart.updateDeliveryOption(productId, deliveryOptionId);
+
+    renderOrderSummary();
+    renderPaymentSummary();
   });
+});
 }
