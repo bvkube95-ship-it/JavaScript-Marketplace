@@ -1,0 +1,65 @@
+import { loadProductsFetch, productsMap } from "../data/products.js";
+import { getOrder } from "../data/orders.js";
+import { deliveryOptions } from "../data/deliveryOptions.js";
+import addBusinessDays from "./utils/date.js";
+
+async function loadPage() {
+  await loadProductsFetch();
+  
+  const url = new URL(window.location.href);
+  const orderId = url.searchParams.get('orderId');
+  const productId = url.searchParams.get('productId');
+
+  const order = getOrder(orderId);
+
+  const orderItem = order.products.find(p => p.productId === productId);
+  const deliveryOption = deliveryOptions.find(
+    d => d.id === orderItem.deliveryOptionId
+  ) ?? deliveryOptions[0];
+
+  const deliveryDate = addBusinessDays(
+    dayjs(order.orderTime).startOf('day'),
+    deliveryOption.deliveryDays
+  );
+  const deliveryDateFormatted = deliveryDate.format('dddd, MMMM D');
+
+  const product = productsMap[orderItem.productId];
+
+  const trackingHTML = `
+      <a class="back-to-orders-link link-primary" href="orders.html">
+          View all orders
+        </a>
+
+        <div class="delivery-date">
+          Arriving on ${deliveryDateFormatted}
+        </div>
+
+        <div class="product-info">
+          ${product.name}
+        </div>
+
+        <div class="product-info">
+          Quantity: ${orderItem.quantity}
+        </div>
+
+        <img class="product-image" src="${product.image}">
+
+        <div class="progress-labels-container">
+          <div class="progress-label">
+            Preparing
+          </div>
+          <div class="progress-label current-status">
+            Shipped
+          </div>
+          <div class="progress-label">
+            Delivered
+          </div>
+        </div>
+
+        <div class="progress-bar-container">
+          <div class="progress-bar"></div>
+        </div>
+  `;
+  document.querySelector('.js-order-tracking').innerHTML = trackingHTML;
+}
+loadPage();
