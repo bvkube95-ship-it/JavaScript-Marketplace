@@ -37,18 +37,28 @@
   gap: 12px;
   justify-content: center;
   margin-top: 16px;
+  margin-bottom: 15px;
 }
 
 .popup-btn {
   padding: 8px 20px;
-  border: none;
+  border: 5px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
 }
 
 .popup-btn--confirm {
-  display: flex;
+  color: rgb(33, 33, 33);
+  background-color: rgb(255, 216, 20);
+  border: 1px solid rgb(252, 210, 0);
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
+}
+
+.popup-checkbox {
+  margin-top: 50px
 }
 
 .page-title {
