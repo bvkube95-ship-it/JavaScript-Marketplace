@@ -6,6 +6,7 @@ import addBusinessDays from "../utils/date.js";
 import { deliveryOptions } from "../../data/deliveryOptions.js";
 import { updateQuantity } from "../checkout/paymentSummary.js";
 import enterListener from "../utils/enterListener.js";
+import { showPopup } from "./popup.js";
 
 export function renderOrders() {
   let ordersHTML = '';
@@ -89,9 +90,9 @@ export function renderOrders() {
       button.addEventListener('click', () => {
         const productId = button.dataset.productId;
         cart.addToCart(productId, 1);
-        window.location.href = 'checkout.html';
+        showPopup();
+        updateQuantity();
       });
     });
-    updateQuantity();
     enterListener();
 }

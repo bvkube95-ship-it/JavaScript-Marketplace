@@ -9,6 +9,48 @@
   margin-right: auto;
 }
 
+.popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+
+.popup-message {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(230, 230, 230);
+  color: black;
+  padding: 24px;
+  border-radius: 8px;
+  z-index: 100;
+  text-align: center;
+  min-width: 260px;
+}
+
+.popup-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.popup-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.popup-btn--confirm {
+  display: flex;
+}
+
 .page-title {
   font-weight: 700;
   font-size: 26px;
