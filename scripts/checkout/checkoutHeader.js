@@ -9,7 +9,7 @@ export function renderHeader() {
 
   const html = `
   Checkout (
-        <a class="return-to-home-link" href="amazon.html">
+        <a class="return-to-home-link" href="index.html">
           <div class="js-checkout-quantity">${itemsQuantity} Items</div>
         </a>
         )
