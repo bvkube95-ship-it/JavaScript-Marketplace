@@ -5,6 +5,7 @@ import formatCurrency from "../utils/money.js";
 import addBusinessDays from "../utils/date.js";
 import { deliveryOptions } from "../../data/deliveryOptions.js";
 import { updateQuantity } from "../checkout/paymentSummary.js";
+import enterListener from "../utils/enterListener.js";
 
 export function renderOrders() {
   let ordersHTML = '';
@@ -91,4 +92,6 @@ export function renderOrders() {
         window.location.href = 'checkout.html';
       });
     });
+    updateQuantity();
+    enterListener();
 }

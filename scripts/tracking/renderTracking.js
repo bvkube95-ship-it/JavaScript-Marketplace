@@ -3,6 +3,7 @@ import { getOrder } from "../../data/orders.js";
 import { deliveryOptions } from "../../data/deliveryOptions.js";
 import addBusinessDays from "../utils/date.js";
 import { updateQuantity } from "../checkout/paymentSummary.js";
+import enterListener from "../utils/enterListener.js";
 
 export async function renderTracking() {
   await loadProductsFetch();
@@ -88,6 +89,7 @@ export async function renderTracking() {
         </div>
   `;
   document.querySelector('.js-order-tracking').innerHTML = trackingHTML;
+  enterListener();
 }
 
 export default renderTracking;
